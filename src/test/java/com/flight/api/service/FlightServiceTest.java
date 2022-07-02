@@ -17,7 +17,7 @@ import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
-@DataJpaTest(showSql = true)
+@DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class FlightServiceTest {
     FlightService flightService;
@@ -37,8 +37,6 @@ public class FlightServiceTest {
     @Test
     @DisplayName("Retrieving the flight details using mock repository")
     public void getFlightDetailsTest() {
-        //when(flightRepositoryMock.searchAllByOriginOrDestination("AMS","DEL")).thenReturn(TestUtility.prepareListOfFlights());
-
         List<FlightData> data = flightService.getFlightDetails("AMS", "DEL");
         assertThat(data.size(), is(1));
         assertThat(data.get(0).getFlightNumber(), is("A101"));
