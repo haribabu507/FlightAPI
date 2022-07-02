@@ -57,6 +57,8 @@
 		<dependency>
 			<groupId>org.mapstruct</groupId>
 			<artifactId>mapstruct</artifactId>
+			<scope>provided</scope>
+			<optional>true</optional>
 			<version>1.5.2.Final</version>
 		</dependency>
 		<dependency>

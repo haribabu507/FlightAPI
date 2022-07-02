@@ -1,5 +1,6 @@
-package com.flight.api.exceptions;
+package com.flight.api.controller;
 
+import com.flight.api.exception.FlightAPICustomException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -13,7 +14,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @Slf4j
 public class FlightAPIGlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(value = Exception.class)
+    @ExceptionHandler(value = FlightAPICustomException.class)
     public ResponseEntity<Object> handleConstraintVoilationError(RuntimeException e, WebRequest request) {
         return handleExceptionInternal(e, e.getLocalizedMessage(), new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
     }

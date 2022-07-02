@@ -16,11 +16,9 @@ import java.util.Objects;
 public class FlightSortRepository {
 
     private final EntityManager entityManager;
-    CriteriaBuilder cb;
 
     public FlightSortRepository(EntityManager entityManager) {
         this.entityManager = entityManager;
-        this.cb = entityManager.getCriteriaBuilder();
     }
 
     /**
@@ -29,10 +27,11 @@ public class FlightSortRepository {
      * @return
      */
     public List<FlightData> sortedFlightInfo(FilterInfo info) {
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<FlightData> flightDataCriteriaQuery = cb.createQuery(FlightData.class);
         Root<FlightData> flightDataRoot = flightDataCriteriaQuery.from(FlightData.class);
 
-        Predicate predicates = getPredicates(info, flightDataRoot);
+        Predicate predicates = getPredicates(info, flightDataRoot, cb);
         flightDataCriteriaQuery.where(predicates);
 
         List<Order> orders = new ArrayList<>();
@@ -58,7 +57,7 @@ public class FlightSortRepository {
      * @param root
      * @return
      */
-    private Predicate getPredicates(FilterInfo info, Root<FlightData> root) {
+    private Predicate getPredicates(FilterInfo info, Root<FlightData> root, CriteriaBuilder cb) {
         List<Predicate> predicates = new ArrayList<>();
         if (Objects.nonNull(info.getDepatureTime())){
             predicates.add(cb.greaterThanOrEqualTo(root.get("depatureTime"), info.getDepatureTime()));

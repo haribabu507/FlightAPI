@@ -11,6 +11,5 @@ import java.util.List;
  */
 @Mapper(componentModel = "spring")
 public interface FlightInterface {
-    List<FlightData> addFlights(List<FlightInfo> flightInfoList);
     List<FlightInfo> getFlightInfo(List<FlightData> listFlightData);
 }

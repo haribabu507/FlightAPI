@@ -3,9 +3,11 @@ package com.flight.api.entities;
 import lombok.Data;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.sql.Timestamp;
-import java.util.Date;
 import java.util.UUID;
 
 @Data

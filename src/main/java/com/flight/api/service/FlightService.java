@@ -1,6 +1,7 @@
 package com.flight.api.service;
 
 import com.flight.api.entities.FlightData;
+import com.flight.api.exception.FlightAPICustomException;
 import com.flight.api.model.FilterInfo;
 import com.flight.api.repository.FlightRepository;
 import com.flight.api.repository.FlightSortRepository;
@@ -22,22 +23,17 @@ public class FlightService {
     }
 
     /**
-     *
-     * @param data
-     * @return
-     */
-    public List<FlightData> addFlight(List<FlightData> data) {
-        return repository.saveAll(data);
-    }
-
-    /**
      * To get the flight details using origin and destination
      * @param origin
      * @param destination
      * @return
      */
     public List<FlightData> getFlightDetails(String origin, String destination) {
-        return repository.searchAllByOriginOrDestination(origin, destination);
+        try {
+            return repository.searchAllByOriginAndDestination(origin, destination);
+        } catch (Exception e) {
+            throw new FlightAPICustomException(e.getMessage());
+        }
     }
 
     /**

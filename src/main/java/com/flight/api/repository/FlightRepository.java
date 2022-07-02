@@ -16,6 +16,6 @@ public interface FlightRepository extends JpaRepository<FlightData, UUID> {
      * @param destination
      * @return
      */
-    List<FlightData> searchAllByOriginOrDestination(String origin, String destination);
+    List<FlightData> searchAllByOriginAndDestination(String origin, String destination);
 
 }
