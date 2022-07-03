@@ -21,10 +21,8 @@ public class FlightAPIGlobalExceptionHandlerTest {
 
     private MockMvc mockMvc;
 
-    @MockBean
-    FlightService flightService;
-    @MockBean
-    FlightInterface flightInterface;
+    @MockBean FlightService flightService;
+    @MockBean FlightInterface flightInterface;
 
     FlightController controller;
 
@@ -40,7 +38,9 @@ public class FlightAPIGlobalExceptionHandlerTest {
     @DisplayName("Test RestGolbalAdvice annotation")
     public void exceptionHandlerTest() throws Exception {
         when(controller.getFlightDetails("AMS", "DEL")).thenThrow(new FlightAPICustomException("Failed to get Flight details"));
-        mockMvc.perform(MockMvcRequestBuilders.get("/flightApi/getFlightInfo"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/flightApi/getFlightInfo")
+                        .param("origin", "AMS")
+                        .param("destination", "DEL"))
                 .andExpect(MockMvcResultMatchers.status().is(500));
     }
 }

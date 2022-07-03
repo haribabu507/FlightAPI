@@ -3,6 +3,7 @@ package com.flight.api.service;
 import com.flight.api.entities.FlightData;
 import com.flight.api.repository.FlightRepository;
 import com.flight.api.repository.FlightSortRepository;
+import com.flight.api.util.TestUtility;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -25,9 +26,9 @@ public class FlightServiceTest {
     @Autowired
     FlightRepository flightRepository;
 
-    @Autowired TestEntityManager entityManager;
+    @Autowired EntityManager entityManager;
 
-    FlightSortRepository flightSortRepository = new FlightSortRepository((EntityManager) entityManager);
+    FlightSortRepository flightSortRepository = new FlightSortRepository(entityManager);
 
     @BeforeEach
     void setup() {

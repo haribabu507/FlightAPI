@@ -9,5 +9,4 @@ public class FlightApiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(FlightApiApplication.class, args);
 	}
-
 }

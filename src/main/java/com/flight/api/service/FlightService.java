@@ -42,6 +42,10 @@ public class FlightService {
      * @return
      */
     public List<FlightData> getSortedFlightDetails(FilterInfo info) {
-        return sortRepository.sortedFlightInfo(info);
+        try{
+            return sortRepository.sortedFlightInfo(info);
+        } catch (Exception e) {
+            throw new FlightAPICustomException(e.getMessage());
+        }
     }
 }

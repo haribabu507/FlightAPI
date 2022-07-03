@@ -37,7 +37,7 @@ public class FlightControllerTest {
     @DisplayName("Test to retrieve the FLight details with origin and destination")
     public void getFlightDetailsTest() {
 
-        when(flightServiceMock.getFlightDetails(any(String.class), any(String.class))).thenReturn(TestUtility.prepareListOfFlights());
+        when(flightServiceMock.getFlightDetails("AMS", "DEL")).thenReturn(TestUtility.prepareListOfFlights());
 
         ResponseEntity<FlightInfoList> responseEntity = flightController.getFlightDetails("AMS", "DEL");
         assertThat(responseEntity.getBody().getFlightList().size(), is(1));

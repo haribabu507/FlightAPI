@@ -17,7 +17,7 @@ public class FlightSortRepository {
 
     private final EntityManager entityManager;
 
-    public FlightSortRepository(EntityManager entityManager) {
+    public  FlightSortRepository(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
 

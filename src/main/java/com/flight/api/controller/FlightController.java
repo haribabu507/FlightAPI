@@ -1,5 +1,6 @@
 package com.flight.api.controller;
 
+import com.flight.api.exception.FlightAPICustomException;
 import com.flight.api.model.FilterInfo;
 import com.flight.api.model.FlightInfoList;
 import com.flight.api.service.FlightInterface;
@@ -21,9 +22,16 @@ public class FlightController {
     }
 
     @GetMapping(path = "/flightApi/getFlightInfo")
-    public ResponseEntity<FlightInfoList> getFlightDetails(@RequestParam(name = "origin", required = false) String origin,
-                                             @RequestParam(name = "destination", required = false) String destination) {
+    public ResponseEntity<FlightInfoList> getFlightDetails(@RequestParam(name = "origin") String origin,
+                                             @RequestParam(name = "destination") String destination) {
 
+        if (origin == null || origin.isBlank()) {
+            throw new FlightAPICustomException("Origin is required");
+        }
+
+        if (destination == null || destination.isBlank()) {
+            throw new FlightAPICustomException("Destination is required");
+        }
         FlightInfoList flightInfoList = new FlightInfoList();
         flightInfoList.setFlightList(flightInterface.getFlightInfo(flightService.getFlightDetails(origin, destination)));
         return ResponseEntity.ok(flightInfoList);
